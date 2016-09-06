@@ -14,7 +14,6 @@ angular.module('myApp.AddUsers', ['ngRoute'])
 $scope.addUser = function() {
 	$scope.user.password = md5($scope.user.password);
     Users.save($scope.user, function() {
-		console.log($scope.user);
 		$location.path('/users');
     });
 };

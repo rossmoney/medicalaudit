@@ -1,3 +1,4 @@
+
 var express = require('express'),
 cors = require('cors'),
 bodyParser = require("body-parser"),
@@ -19,6 +20,7 @@ app.use(cors());
 
 require('./app/models/patient');
 require('./app/models/user');
+require('./app/models/session');
 require('./app/routes')(app);
 
 app.listen(process.env.PORT || 8000);

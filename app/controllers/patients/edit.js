@@ -16,6 +16,13 @@ angular.module('myApp.EditPatients', ['ngRoute'])
     $http.get('/patients/'+ $routeParams.id).success(function(data) { 
         $scope.patient = data;  
 		$scope.oriPatient = angular.copy($scope.patient);
+		
+		$scope.patient.firstin = $scope.patient.anonid[0],
+		$scope.patient.lastin = $scope.patient.anonid[$scope.patient.anonid.length - 1];
+		var dob = $scope.patient.anonid.slice(0, -1).slice(1, $scope.patient.anonid.length - 1);
+			
+		$scope.patient.dob = dob.slice(0, 4) + '/' + dob.slice(6, 8) + '/' + dob.slice(4, 6);
+		console.log($scope.patient.dob);
     }); 
 
 $scope.checkDates = function() {
@@ -58,9 +65,6 @@ $scope.editPatient = function() {
 	if(typeof($scope.patient.refrecieved) != Date) {
 		$scope.patient.refrecieved = new Date($scope.patient.refrecieved);
 	}
-	$scope.patient.anonid = $scope.patient.whereseen[0] + $scope.patient.refrecieved.getFullYear() + 
-		$scope.patient.refrecieved.getDate() + $scope.patient.refrecieved.getMonth() + 
-		$scope.patient.whereseen[$scope.patient.whereseen.length - 1];
 		
 	var editData = {
             anonid : $scope.patient.anonid, 
