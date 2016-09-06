@@ -1,0 +1,101 @@
+<ul class="menu">
+	<li><a href="#!/captureform">Add Patient</a></li>
+    <li><a href="#!/patients">View Patients</a></li>
+    <li><a href="#!/users">View Users</a></li>
+	<li><a href="#!/logout">Logout</a></li>
+</ul>
+<form name="editPatientForm" class="form-horizontal" ng-submit="editPatient()">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Edit Patient</legend>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+    <!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="refrecieved">Referral for foetal cardiac scan received</label>  
+  <div class="col-md-4">
+  <datetimepicker id="refrecieved" ng-change="checkDates()" name="refrecieved" required="" data-ng-model="patient.refrecieved"></datetimepicker>
+  <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
+  </div>
+</div>
+    </div>
+    <div class="col-sm-6">
+     <!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="scanundertaken">Foetal cardiac scan undertaken</label>  
+  <div class="col-md-4">
+  <datetimepicker id="scanundertaken" ng-change="checkDates()" name="scanundertaken" required="" data-ng-model="patient.scanundertaken"></datetimepicker>
+  <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="reasonfordelay">Reason for delay</label>  
+  <div class="col-md-4">
+  <input id="reasonfordelay" name="reasonfordelay" ng-model="patient.reasonfordelay" type="text" placeholder="" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="abnormaloutcome">Abnormal Outcome?</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="abnormaloutcome-0">
+      <input type="checkbox" name="abnormaloutcome" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
+      Y
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="chdtype">Type of CHD</label>
+  <div class="col-md-4">
+    <select id="chdtype" name="chdtype" ng-model="patient.chdtype" class="form-control">
+      <option value="ALCAPA">ALCAPA</option>
+      <option value="HLHS">HLHS</option>
+      <option value="TOF">TOF</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="whereseen">Where seen?</label>  
+  <div class="col-md-4">
+  <input id="whereseen" name="whereseen" ng-model="patient.whereseen" type="text" placeholder="GH" class="form-control input-md" required="">
+  <span class="help-block">Enter the hospital code</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="dateseen">Date seen</label>  
+  <div class="col-md-4">
+  <datetimepicker id="dateseen" name="dateseen" required="" data-ng-model="patient.dateseen"></datetimepicker>
+  <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="savePatient"></label>
+  <div class="col-md-8">
+    <input type="submit" id="savePatient" name="savePatient" class="btn btn-success" value="Save Record" />
+	<button id="cancelEdit" ng-click="cancelEditPatient()" name="cancelEdit" class="btn btn-danger">Cancel Edit</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+

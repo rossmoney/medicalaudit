@@ -1,0 +1,40 @@
+<ul class="menu">
+	<li><a href="#!/captureform">Add Patient</a></li>
+    <li><a href="#!/patients">View Patients</a></li>
+    <li><a href="#!/users">View Users</a></li>
+	<li><a href="#!/logout">Logout</a></li>
+</ul>
+<form class="form-horizontal" ng-submit="addUser()">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Add User</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Username</label>  
+  <div class="col-md-4">
+  <input id="username" name="username" type="text" ng-model="user.username" placeholder="" class="form-control input-md" required=""> 
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="password">Password</label>
+  <div class="col-md-4">
+    <input id="password" name="password" type="password" ng-model="user.password" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">must be 8 characters</span>
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="addUser"></label>
+  <div class="col-md-8">
+    <input type="submit" id="addUser" name="addUser" class="btn btn-success" value="Save User" />
+	<button type="button" class="btn btn-danger" ng-click="cancelAddUser()">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

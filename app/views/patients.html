@@ -1,0 +1,42 @@
+<ul class="menu">
+	<li><a href="#!/captureform">Add Patient</a></li>
+    <li><a href="#!/patients">View Patients</a></li>
+    <li><a href="#!/users">View Users</a></li>
+	<li><a href="#!/logout">Logout</a></li>
+</ul>
+<legend>Patient Listing</legend>
+<table class="table">
+    <thead>
+	  <tr>
+	    <th>Anonymous Patient ID</th>
+        <th>Referral for foetal cardiac scan received</th>
+        <th>Foetal cardiac scan undertaken</th>
+        <th>No. days taken</th>
+		<th>Within national target (3 days)?</th>
+		<th>Reason for delay</th>
+		<th>Abnormal outcome?</th>
+		<th>Type of CHD</th>
+		<th>Where seen</th>
+		<th>Day seen</th>
+	  </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="patient in patientsList">
+        <td>{{patient.anonid}}</td>
+        <td>{{patient.refrecieved | date : "short" }}</td>
+        <td>{{patient.scanundertaken | date : "short" }}</td>
+        <td>{{patient.numdaystaken}}</td>
+		<td>{{patient.withinnationaltarget}}</td>
+		<td>{{patient.reasonfordelay}}</td>
+		<td>{{patient.abnormaloutcome}}</td>
+		<td>{{patient.chdtype}}</td>
+		<td>{{patient.whereseen}}</td>
+		<td>{{patient.dateseen | date : "EEEE"}}</td>
+		<td>
+			<button type="button" class="btn btn-default" ng-edit-patient="$index">Edit</button>
+			<button type="button" class="btn btn-danger" ng-remove-patient="$index">X</button>
+		</td>
+      </tr>
+    </tbody>
+  </table>
+  
