@@ -8,16 +8,16 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
     controller: 'Patients'
   });
 }])
-.factory('Patients', ['$resource', function($resource) {
-  return $resource( '/patients/:_id', null,
-    {
-        'update': { method:'PUT' }
-    });
-}])
-.factory('PatientService', ['$rootScope', '$location', function($rootScope, $location){
+.factory('PatientService', ['$rootScope', '$location', '$resource', function($rootScope, $location, $resource){
     return {
         removePatient: function(patientIndex, scope){
-			scope.patient.$delete({action:"delete", _id:scope.patient._id}, function() {
+			var Patients = $resource( '/patients/:id', {},
+			{
+			'delete' : {
+				method: 'DELETE',
+				isArray: false
+			}
+			}).delete({id:scope.patient._id}, function() {
 				scope.patientsList.splice(patientIndex, 1);
 			});
             scope.$apply();
@@ -57,6 +57,18 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
         }));       
     };
 }])
-.controller('Patients', ['$scope', 'Patients', function($scope, patients) {
-	$scope.patientsList = patients.query();
+.controller('Patients', ['$scope', '$resource', '$location', function($scope, $resource, $location) {
+	var Patients = $resource( '/patients', {},
+		{
+			'findAll' : {
+				method: 'GET',
+				isArray: true
+			}
+		});
+	Patients.findAll().$promise.then(function(patientsList) {
+		if(patientsList.err) {
+			$location.path('/login');
+		}
+		$scope.patientsList = patientsList;
+	});
 }]);

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.captureform', ['ngRoute'])
+angular.module('myApp.captureform', ['ngRoute', 'ngResource'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/captureform', {
@@ -14,8 +14,8 @@ angular.module('myApp.captureform', ['ngRoute'])
         'update': { method:'PUT' }
     });
 }])
-.controller('CaptureForm', ['$scope', 'Sessions', 'Patients', '$location', '$rootScope', '$cookieStore', '$http', 
-	function($scope, Sessions, Patients, $location, $rootScope, $cookieStore, $http) {
+.controller('CaptureForm', ['$scope', 'Sessions', '$resource', '$location', '$rootScope', '$cookieStore', '$http', 
+	function($scope, Sessions, $resource, $location, $rootScope, $cookieStore, $http) {
 	
 // reset login status
 		if($rootScope.globals.currentUser) Sessions.update({ _id: $rootScope.globals.currentUser.tokenid }, { expired: 'Y'});
@@ -42,6 +42,13 @@ $scope.checkDates = function() {
 };
 
 $scope.addPatient = function() {
+	var Patients = $resource( '/patients', {},
+		{
+			'add' : {
+				method: 'POST',
+				isArray: false
+			}
+		});
 	if($scope.patient.abnormaloutcome) {
 		$scope.patient.abnormaloutcome = 'Y';
 	} else {
@@ -55,10 +62,10 @@ $scope.addPatient = function() {
 	} else {
 		$scope.patient.withinnationaltarget = 'N';
 	}
-	$scope.patient.anonid = $scope.patient.firstin[0] + $scope.patient.dob.getFullYear() + 
+	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
 		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
-		$scope.patient.lastin[0];
-    Patients.save($scope.patient, function() {
+		$scope.patient.initials[1];
+    Patients.add($scope.patient, function() {
 		$location.path('/thankyou');
     });
 };

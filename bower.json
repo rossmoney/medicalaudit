@@ -17,8 +17,7 @@
     "angular-cookies": "^1.5.8",
     "moment": "^2.14.1",
     "blueimp-md5": "^2.3.1",
-    "angular-flash": "^0.1.14",
-    "moment-business": "^3.0.0"
+    "angular-data-table": "^0.7.0"
   },
   "resolutions": {
     "angular": "1.5.8"

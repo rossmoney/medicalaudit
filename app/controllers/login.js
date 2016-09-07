@@ -33,7 +33,7 @@
 
 				var d = new Date() ;
 				d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
-
+				
 				$scope.session = {
 					username : $scope.vm.username,
 					logindate: d,
@@ -41,17 +41,17 @@
 				}
 				
 				Sessions.save($scope.session, function(session) {
-					var authdata = md5(user.username + ':' + user.password);
+					$scope.sessionid = session._id;
 					$rootScope.globals = {
 						currentUser: {
 							username: user.username,
-							authdata: authdata,
-							tokenid: session._id,
+							tokenid: session._id
 						}
 					};
  
-					$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+					$http.defaults.headers.common['Authorization'] = $scope.sessionid; // jshint ignore:line
 					$cookieStore.put('globals', $rootScope.globals);
+					$scope.vm.username = 'Please wait, you will be redirected shortly...';
 					$location.path('/patients');
 					$scope.found = true;
 				});

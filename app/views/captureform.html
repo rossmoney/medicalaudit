@@ -6,25 +6,17 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="firstname">First Initial</label>  
+  <label class="col-md-4 control-label" for="firstname">Initials</label>  
   <div class="col-md-4">
-  <input id="firstname" name="firstname" type="text" ng-model="patient.firstin" placeholder="" class="form-control input-md" > 
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="lastname">Last Initial</label>  
-  <div class="col-md-4">
-  <input id="lastname" name="lastname" type="text" ng-model="patient.lastin" placeholder="" class="form-control input-md" >
+  <input id="initials" name="initials" type="text" ng-model="patient.initials" placeholder="" required="" maxlength="2" class="form-control input-md" > 
+  <span class="help-block">Max 2 characters</span> 
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="refrecieved">Date of Birth</label>  
   <div class="col-md-4">
-  <datetimepicker id="dob" name="dob"  data-ng-model="patient.dob"></datetimepicker>
-  <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
+  <input id="dob" name="dob" type="date" ng-model="patient.dob" placeholder="" required="" class="form-control input-md" >
   </div>
 </div>
 
@@ -35,7 +27,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="refrecieved">Referral for fetal cardiac scan received</label>  
   <div class="col-md-4">
-  <datetimepicker id="refrecieved" ng-change="checkDates()" name="refrecieved"  data-ng-model="patient.refrecieved"></datetimepicker>
+  <datetimepicker id="refrecieved" ng-class="{red: patient.refrecieved.$invalid}" ng-change="checkDates()" name="refrecieved"  data-ng-model="patient.refrecieved"></datetimepicker>
   <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
   </div>
 </div>

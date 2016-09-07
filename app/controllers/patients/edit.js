@@ -8,21 +8,25 @@ angular.module('myApp.EditPatients', ['ngRoute'])
     controller: 'EditPatients'
   });
 }])
-
-.controller('EditPatients', ['$scope', 'Patients', '$location', '$routeParams', '$http', function($scope, Patients, $location, $routeParams, $http) {
+.controller('EditPatients', ['$rootScope', '$scope', '$resource', '$location', '$routeParams', '$http', 
+	function($rootScope, $scope, $resource, $location, $routeParams, $http) {
 	
     $scope.activePath = null;    
-
-    $http.get('/patients/'+ $routeParams.id).success(function(data) { 
+	
+	$resource( '/patients/:_id', {}, {
+        'findById': { method:'GET',
+					params: { _id: $routeParams.id },
+					isArray: false
+		}
+	}).findById().$promise.then(function(data) {
         $scope.patient = data;  
 		$scope.oriPatient = angular.copy($scope.patient);
 		
-		$scope.patient.firstin = $scope.patient.anonid[0],
-		$scope.patient.lastin = $scope.patient.anonid[$scope.patient.anonid.length - 1];
+		$scope.patient.initials = $scope.patient.anonid[0] +  $scope.patient.anonid[$scope.patient.anonid.length - 1];
 		var dob = $scope.patient.anonid.slice(0, -1).slice(1, $scope.patient.anonid.length - 1);
 			
 		$scope.patient.dob = dob.slice(0, 4) + '/' + dob.slice(6, 8) + '/' + dob.slice(4, 6);
-		console.log($scope.patient.dob);
+		$scope.patient.dob = new Date($scope.patient.dob);
     }); 
 
 $scope.checkDates = function() {
@@ -61,10 +65,14 @@ $scope.editPatient = function() {
 	} else {
 		$scope.patient.withinnationaltarget = 'N';
 	}
-
-	if(typeof($scope.patient.refrecieved) != Date) {
-		$scope.patient.refrecieved = new Date($scope.patient.refrecieved);
+	
+	if(typeof($scope.patient.dob) != Date) {
+		$scope.patient.dob = new Date($scope.patient.dob);
 	}
+	
+	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
+		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
+		$scope.patient.initials[1];
 		
 	var editData = {
             anonid : $scope.patient.anonid, 
@@ -78,9 +86,15 @@ $scope.editPatient = function() {
 			whereseen: $scope.patient.whereseen,
 			dateseen: $scope.patient.dateseen    
         };
-
-    $http.put('/patients/' + $scope.patient._id, JSON.stringify(editData));
-	$location.path('/patients');
+		
+	$resource( '/patients/:_id', {}, {
+        'update': { method:'POST',
+					params: { _id: $scope.patient._id },
+					isArray: false
+		}
+	}).update($scope.patient).$promise.then(function() {
+		$location.path('/patients');
+	});
 };
 
 $scope.cancelEditPatient = function() {

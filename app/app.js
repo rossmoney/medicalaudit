@@ -35,7 +35,6 @@ angular.module('myApp', [
   delete $httpProvider.defaults.headers.common["X-Requested-With"];
   $httpProvider.defaults.headers.common["Accept"] = "application/json";
   $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-  //$httpProvider.defaults.headers.common["Access-Control-Allow-Origin"] = "http://localhost:3001";
   
   // Don't strip trailing slashes from calculated URLs
   $resourceProvider.defaults.stripTrailingSlashes = false;
@@ -56,7 +55,7 @@ angular.module('myApp', [
 		
 		// keep user logged in after page refresh
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.tokenid; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = $rootScope.globals.currentUser.tokenid; // jshint ignore:line
         }
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -70,7 +69,7 @@ angular.module('myApp', [
 				d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
 				var minutesPassed = moment(d).diff(givenTime, "minutes");
 				
-				if(result._id == $rootScope.globals.currentUser.tokenid && minutesPassed > 5) {
+				if(result._id == $rootScope.globals.currentUser.tokenid && minutesPassed > 15) {
 					Sessions.update({ _id: $rootScope.globals.currentUser.tokenid }, { expired: 'Y'});
 					$rootScope.globals = {};
 					$cookieStore.remove('globals');
