@@ -43,20 +43,8 @@ angular.module('myApp.captureform', ['ngRoute', 'ngResource'])
     controller: 'CaptureForm'
   });
 }])
-.factory('Sessions', ['$resource', function($resource) {
-  return $resource( '/sessions/:_id', null,
-    {
-        'update': { method:'PUT' }
-    });
-}])
-.controller('CaptureForm', ['$scope', 'Sessions', '$resource', '$location', '$rootScope', '$cookieStore', '$http', 
-	function($scope, Sessions, $resource, $location, $rootScope, $cookieStore, $http) {
-	
-// reset login status
-		if($rootScope.globals.currentUser) Sessions.update({ _id: $rootScope.globals.currentUser.tokenid }, { expired: 'Y'});
-		$rootScope.globals = {};
-        $cookieStore.remove('globals');
-        $http.defaults.headers.common.Authorization = 'Basic';
+.controller('CaptureForm', ['$scope', '$resource', '$location', '$rootScope', 
+	function($scope, $resource, $location, $rootScope) {
 
 $scope.checkDates = function() {
 	var d1 = moment($scope.patient.refrecieved);
@@ -102,6 +90,12 @@ $scope.addPatient = function() {
 	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
 		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
 		$scope.patient.initials[1];
+		
+	if($rootScope.globals.currentUser) {
+		$scope.patient.addedby = $rootScope.globals.currentUser.username;
+	} else {
+		$scope.patient.addedby = 'Form User';
+	} 
     Patients.add($scope.patient, function() {
 		$location.path('/thankyou');
     });

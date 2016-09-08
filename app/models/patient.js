@@ -8,7 +8,8 @@ var PatientSchema = new Schema({
   reasonfordelay: String,
   abnormaloutcome: String,
   chdtype: String,
-  whereseen: String
+  whereseen: String,
+  addedby: String
 });
 
 mongoose.model('Patient', PatientSchema);

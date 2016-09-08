@@ -103,6 +103,9 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
 	  } else {
 		patient.withinnationaltarget = 'N';
 	  }
+	  if(!patient.addedby) {
+		  patient.addedby = 'Form User';
+	  }
     })
     return input;
   }

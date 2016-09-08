@@ -18,6 +18,7 @@
 		<th>Type of CHD</th>
 		<th>Where seen</th>
 		<th>Day seen</th>
+		<th>Added by</th>
 	  </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
 		<td>{{patient.chdtype}}</td>
 		<td>{{patient.whereseen}}</td>
 		<td>{{patient.scanundertaken | date : "EEEE"}}</td>
+		<td>{{patient.addedby}}</td>
 		<td>
 			<button type="button" class="btn btn-default" ng-edit-patient="$index">Edit</button>
 			<button type="button" class="btn btn-danger" ng-remove-patient="$index">X</button>
