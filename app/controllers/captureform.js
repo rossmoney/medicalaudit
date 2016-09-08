@@ -54,14 +54,7 @@ $scope.addPatient = function() {
 	} else {
 		$scope.patient.abnormaloutcome = 'N';
 	}
-	var d1 = moment($scope.patient.refrecieved);
-	var d2 = moment($scope.patient.scanundertaken);
-	$scope.patient.numdaystaken = Math.floor(moment.duration(d2.diff(d1)).asDays());
-	if($scope.patient.numdaystaken <= 3) {
-		$scope.patient.withinnationaltarget = 'Y';
-	} else {
-		$scope.patient.withinnationaltarget = 'N';
-	}
+
 	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
 		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
 		$scope.patient.initials[1];

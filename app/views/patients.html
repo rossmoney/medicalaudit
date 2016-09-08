@@ -21,7 +21,7 @@
 	  </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="patient in patientsList">
+      <tr ng-repeat="patient in patientsList | dataFilter">
         <td>
 			{{patient.anonid}}
 			<button ng-reveal-dob="$index" class="btn btn-danger">Reveal Initials & DoB</button>
@@ -34,7 +34,7 @@
 		<td>{{patient.abnormaloutcome}}</td>
 		<td>{{patient.chdtype}}</td>
 		<td>{{patient.whereseen}}</td>
-		<td>{{patient.dateseen | date : "EEEE"}}</td>
+		<td>{{patient.scanundertaken | date : "EEEE"}}</td>
 		<td>
 			<button type="button" class="btn btn-default" ng-edit-patient="$index">Edit</button>
 			<button type="button" class="btn btn-danger" ng-remove-patient="$index">X</button>

@@ -5,13 +5,10 @@ var PatientSchema = new Schema({
   anonid: String,
   refrecieved: Date,
   scanundertaken: Date,
-  numdaystaken: Number,
-  withinnationaltarget: String,
   reasonfordelay: String,
   abnormaloutcome: String,
   chdtype: String,
-  whereseen: String,
-  dateseen: Date
+  whereseen: String
 });
 
 mongoose.model('Patient', PatientSchema);

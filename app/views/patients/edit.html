@@ -33,7 +33,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="refrecieved">Referral for fetal cardiac scan received</label>  
   <div class="col-md-4">
-  <datetimepicker id="refrecieved" ng-change="checkDates()" name="refrecieved"  data-ng-model="patient.refrecieved"></datetimepicker>
+  <datetimepicker id="refrecieved" data-datetimepicker-config="{ minView: 'hour' }" ng-change="checkDates()" name="refrecieved"  data-ng-model="patient.refrecieved"></datetimepicker>
   <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
   </div>
 </div>
@@ -43,7 +43,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="scanundertaken">Fetal cardiac scan undertaken</label>  
   <div class="col-md-4">
-  <datetimepicker id="scanundertaken" ng-change="checkDates()" name="scanundertaken" ng-class="{red: patient.scanundertaken.$invalid}" data-ng-model="patient.scanundertaken"></datetimepicker>
+  <datetimepicker id="scanundertaken" data-datetimepicker-config="{ minView: 'hour' }" ng-change="checkDates()" name="scanundertaken" ng-class="{red: patient.scanundertaken.$invalid}" data-ng-model="patient.scanundertaken"></datetimepicker>
   <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
   </div>
 </div>
@@ -91,15 +91,6 @@
   <div class="col-md-4">
   <input id="whereseen" name="whereseen" ng-model="patient.whereseen" type="text" placeholder="GH" class="form-control input-md" >
   <span class="help-block">Enter the hospital code</span>  
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="dateseen">Date seen</label>  
-  <div class="col-md-4">
-  <datetimepicker id="dateseen" name="dateseen"  data-ng-model="patient.dateseen"></datetimepicker>
-  <span class="help-block">Select a date, make sure you click through all the times for the date to be saved.</span>  
   </div>
 </div>
 

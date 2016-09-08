@@ -53,8 +53,9 @@ exports.update = function(req, res) {
   Session.findById({_id: token}, function(err, result) {
 	if (err) return res.send( '{ "err": "Invalid Auth!" }');
 	if(result._id == token && result.expired == 'N') {
-
-  Patient.update({"_id": req.params._id}, req.body,
+console.log(req.params);
+console.log(req.body);
+  Patient.update({"_id": req.params.id}, req.body,
     function (err, numberAffected) {
       if (err) return console.log(err);
       console.log('Updated patient');

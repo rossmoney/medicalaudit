@@ -50,20 +50,12 @@ $scope.checkDates = function() {
 $scope.resetForm = function () {
     $scope.patient = angular.copy($scope.oriPatient);
 };
-	
+
 $scope.editPatient = function() {
 	if($scope.patient.abnormaloutcome) {
 		$scope.patient.abnormaloutcome = 'Y';
 	} else {
 		$scope.patient.abnormaloutcome = 'N';
-	}
-	var d1 = moment($scope.patient.refrecieved);
-	var d2 = moment($scope.patient.scanundertaken);
-	$scope.patient.numdaystaken = Math.floor(moment.duration(d2.diff(d1)).asDays());
-	if($scope.patient.numdaystaken <= 3) {
-		$scope.patient.withinnationaltarget = 'Y';
-	} else {
-		$scope.patient.withinnationaltarget = 'N';
 	}
 	
 	if(typeof($scope.patient.dob) != Date) {
@@ -78,21 +70,17 @@ $scope.editPatient = function() {
             anonid : $scope.patient.anonid, 
             refrecieved: $scope.patient.refrecieved,
 			scanundertaken: $scope.patient.scanundertaken,
-			numdaystaken: $scope.patient.numdaystaken,
-			withinnationaltarget: $scope.patient.withinnationaltarget,
 			reasonfordelay: $scope.patient.reasonfordelay,
 			abnormaloutcome: $scope.patient.abnormaloutcome,
 			chdtype: $scope.patient.chdtype,
-			whereseen: $scope.patient.whereseen,
-			dateseen: $scope.patient.dateseen    
+			whereseen: $scope.patient.whereseen 
         };
 		
-	$resource( '/patients/:_id', {}, {
-        'update': { method:'POST',
-					params: { _id: $scope.patient._id },
+	$resource( '/patients/' + $scope.patient._id , { _id: $scope.patient._id }, {
+        'update': { method:'PUT',
 					isArray: false
 		}
-	}).update($scope.patient).$promise.then(function() {
+	}).update(editData).$promise.then(function() {
 		$location.path('/patients');
 	});
 };
