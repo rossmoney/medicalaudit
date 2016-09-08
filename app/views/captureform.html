@@ -2,7 +2,7 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Data Capture Form</legend>
+<legend>Add Patient</legend>
 
 <!-- Text input-->
 <div class="form-group">
@@ -63,7 +63,7 @@
   <div class="checkbox">
     <label for="abnormaloutcome-0">
       <input type="checkbox" name="abnormaloutcome" onclick="$('#chdtype_container').toggle();" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
-      Y
+      Y (leave unticked if normal)
     </label>
 	</div>
   </div>
@@ -84,7 +84,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="whereseen">Where seen?</label>  
   <div class="col-md-4">
-  <input id="whereseen" name="whereseen" ng-model="patient.whereseen" type="text" placeholder="GH" class="form-control input-md" >
+  <input id="whereseen" name="whereseen" ng-model="patient.whereseen" type="text" class="form-control input-md" >
   <span class="help-block">Enter the hospital code</span>  
   </div>
 </div>

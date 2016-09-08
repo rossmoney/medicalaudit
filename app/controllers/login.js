@@ -15,8 +15,8 @@
         'update': { method:'PUT' }
     });
 }])
-.controller('LoginController', ['$location', 'Users', 'Sessions', '$rootScope', '$cookieStore', '$http', '$scope', 
-	function($location, Users, Sessions, $rootScope, $cookieStore, $http, $scope) {
+.controller('LoginController', ['$location', 'Users', 'Sessions', '$rootScope', '$cookieStore', '$http', '$scope', '$resource',
+	function($location, Users, Sessions, $rootScope, $cookieStore, $http, $scope, $resource) {
  
         // reset login status
 		if($rootScope.globals.currentUser) Sessions.update({ _id: $rootScope.globals.currentUser.tokenid }, { expired: 'Y'});
@@ -33,6 +33,25 @@
 
 				var d = new Date() ;
 				d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
+				
+				var d1 = moment(user.passwordlastreset);
+				var d2 = moment(d);
+				var daydiff = Math.floor(moment.duration(d2.diff(d1)).asDays());
+				console.log(daydiff);
+				if(daydiff > 30 && user.username != 'admin') {
+					var editData = {
+						password: 'Expired'
+					};
+					$resource( '/users/' + user._id , {}, {
+						'update': { method:'PUT',
+						isArray: false
+					}
+					}).update(editData).$promise.then(function() {
+						$scope.vm.username = 'Invalid Login!';
+						alert('Your password has been in use for 30 days and has now expired. Please contact the system admin for a new one.');
+						$location.path('/login');
+					});
+				} else {
 				
 				$scope.session = {
 					username : $scope.vm.username,
@@ -56,6 +75,7 @@
 					$scope.found = true;
 				});
 				
+				}
 				}
 			});
 			

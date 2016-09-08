@@ -1,21 +1,13 @@
-<ul class="menu">
-	<li><a href="#!/captureform">Add Patient</a></li>
-    <li><a href="#!/patients">View Patients</a></li>
-    <li><a href="#!/users">View Users</a></li>
-	<li><a href="#!/logout">Logout</a></li>
-</ul>
 <legend>User Listing</legend>
 <table class="table">
     <thead>
 	  <tr>
 	    <th>Username</th>
-        <th>Password</th>
 	  </tr>
     </thead>
     <tbody>
       <tr ng-repeat="user in usersList">
         <td>{{user.username}}</td>
-        <td>{{user.password}}</td>
 		<td>
 			<button type="button" class="btn btn-danger" ng-remove-user="$index">X</button>
 		</td>

@@ -7,7 +7,7 @@ exports.findAll = function(req, res){
 	var token = req.headers.authorization;
 	console.log('Auth:' + token);
   Session.findById({_id: token}, function(err, result) {
-	if (err) return res.send( '{ "err": "Invalid Auth!", "array" : "true" }');
+	if(!result) return res.send( '[{ "err": "Invalid Auth!" }, {"array" : "true" }]');
 	console.log('Authdata:' + token);
 	console.log('Auth:' + result._id );
 	console.log('expired:' + result.expired );
@@ -51,7 +51,7 @@ exports.update = function(req, res) {
 	  token = req.headers.authorization;
   
   Session.findById({_id: token}, function(err, result) {
-	if (err) return res.send( '{ "err": "Invalid Auth!" }');
+	if (!result) return res.send( '{ "err": "Invalid Auth!" }');
 	if(result._id == token && result.expired == 'N') {
 console.log(req.params);
 console.log(req.body);
@@ -73,7 +73,7 @@ exports.delete = function(req, res){
   var token = req.headers.authorization;
   Session.findById({_id: token}, function(err, result) {
 	console.log(result);
-	if (err) return res.send( '{ "err": "Invalid Auth!" }');
+	if (!result) return res.send( '{ "err": "Invalid Auth!" }');
 	if(result._id == token && result.expired == 'N') {
 		
   Patient.remove({'_id':id},function(result) {

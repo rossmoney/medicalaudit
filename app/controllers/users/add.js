@@ -13,6 +13,9 @@ angular.module('myApp.AddUsers', ['ngRoute'])
 
 $scope.addUser = function() {
 	$scope.user.password = md5($scope.user.password);
+	var d = new Date() ;
+	d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
+	$scope.user.passwordlastreset = d;
     Users.save($scope.user, function() {
 		$location.path('/users');
     });

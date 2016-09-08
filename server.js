@@ -5,8 +5,8 @@ bodyParser = require("body-parser"),
 mongoose = require('mongoose'),
 fs = require('fs');
 
-var mongoUri = 'mongodb://medicalaudit:medicalaudit@ds147995.mlab.com:47995/medicalaudit';
-//var mongoUri = 'mongodb://localhost/patients';
+//var mongoUri = 'mongodb://medicalaudit:medicalaudit@ds147995.mlab.com:47995/medicalaudit';
+var mongoUri = 'mongodb://localhost/patients';
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', function () {

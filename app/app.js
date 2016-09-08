@@ -61,7 +61,7 @@ angular.module('myApp', [
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
 			
-			var restrictedPage = $.inArray($location.path(), ['/captureform', '/thankyou']) === -1;
+			var restrictedPage = $.inArray($location.path(), ['/captureform', '/thankyou', '/users/add']) === -1;
 			
 			if(restrictedPage && $rootScope.globals.currentUser) {
 				$resource('/sessions/:_id', { _id: $rootScope.globals.currentUser.tokenid}).get(function(result) {
