@@ -24,7 +24,7 @@
       <tr ng-repeat="patient in patientsList | dataFilter">
         <td>
 			{{patient.anonid}}
-			<button ng-reveal-dob="$index" class="btn btn-danger">Reveal Initials & DoB</button>
+			<button ng-reveal-dob="$index" class="btn btn-danger">Reveal</button>
 		</td>
         <td>{{patient.refrecieved | date : "dd/MM/yyyy HH:mm" }}</td>
         <td>{{patient.scanundertaken | date : "dd/MM/yyyy HH:mm" }}</td>

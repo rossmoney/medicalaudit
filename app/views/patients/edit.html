@@ -51,6 +51,7 @@
   </div>
 </div>
 
+<div id="reasonfordelay_container" style="display: none;">
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="reasonfordelay">Reason for delay</label>  
@@ -59,6 +60,7 @@
     
   </div>
 </div>
+</div>
 
 <!-- Multiple Checkboxes -->
 <div class="form-group">
@@ -66,23 +68,22 @@
   <div class="col-md-4">
   <div class="checkbox">
     <label for="abnormaloutcome-0">
-      <input type="checkbox" name="abnormaloutcome" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
+      <input type="checkbox" name="abnormaloutcome" onclick="$('#chdtype_container').toggle();" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
       Y
     </label>
 	</div>
   </div>
 </div>
 
-<!-- Select Basic -->
+<div id="chdtype_container" style="display: none;">
+<!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="chdtype">Type of CHD</label>
+  <label class="col-md-4 control-label" for="chdtype">Type of CHD</label>  
   <div class="col-md-4">
-    <select id="chdtype" name="chdtype" ng-model="patient.chdtype" class="form-control">
-      <option value="ALCAPA">ALCAPA</option>
-      <option value="HLHS">HLHS</option>
-      <option value="TOF">TOF</option>
-    </select>
+  <input id="chdtype" name="chdtype" type="text" ng-model="patient.chdtype" placeholder="" class="form-control input-md" > 
+  <span class="help-block">Enter CHD types, followed by a comma (,)</span> 
   </div>
+</div>
 </div>
 
 <!-- Text input-->
