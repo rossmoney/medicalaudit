@@ -63,6 +63,13 @@ angular.module('myApp.EditPatients', ['ngRoute'])
 		$scope.patient.dob = dob.slice(0, 4) + '/' + dob.slice(6, 8) + '/' + dob.slice(4, 6);
 		$scope.patient.dob = new Date($scope.patient.dob);
 		
+		if($scope.patient.abnormaloutcome == 'Y') {
+			$scope.patient.abnormaloutcome = true;
+			$('#chdtype_container').show();
+		} else {
+			$scope.patient.abnormaloutcome = false;
+		}
+		
 	  var d1 = $scope.patient.refrecieved;
 	  var d2 = $scope.patient.scanundertaken;
 	  $scope.patient.numdaystaken = dateDifference(new Date(d1), new Date(d2));
@@ -127,7 +134,8 @@ $scope.editPatient = function() {
 			reasonfordelay: $scope.patient.reasonfordelay,
 			abnormaloutcome: $scope.patient.abnormaloutcome,
 			chdtype: $scope.patient.chdtype,
-			whereseen: $scope.patient.whereseen 
+			whereseen: $scope.patient.whereseen,
+			gestationalage: $scope.patient.gestationalage
         };
 		
 	$resource( '/patients/' + $scope.patient._id , { _id: $scope.patient._id }, {

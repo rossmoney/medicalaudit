@@ -119,8 +119,10 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
 			}
 		});
 	Patients.findAll().$promise.then(function(patientsList) {
-		if(patientsList[0].err) {
-			$location.path('/login');
+		if(patientsList.length > 0) {
+			if(patientsList[0].err) {
+				$location.path('/login');
+			}
 		}
 		$scope.patientsList = patientsList;
 	});

@@ -62,7 +62,12 @@
   <div class="col-md-4">
   <div class="checkbox">
     <label for="abnormaloutcome-0">
-      <input type="checkbox" name="abnormaloutcome" onclick="$('#chdtype_container').toggle();" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
+      <input type="checkbox" name="abnormaloutcome" onclick="$('#chdtype_container').toggle();
+	if ($('#chdtype').attr('required')) {
+        $('#chdtype').removeAttr('required');
+    } else {
+        $('#chdtype').attr('required', 'required');
+    }" ng-model="patient.abnormaloutcome" id="abnormaloutcome-0" value="abnormal">
       Y (leave unticked if normal)
     </label>
 	</div>
@@ -86,6 +91,15 @@
   <div class="col-md-4">
   <input id="whereseen" name="whereseen" ng-model="patient.whereseen" type="text" class="form-control input-md" >
   <span class="help-block">Enter the hospital code</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="gestationalage">Gestational age</label>  
+  <div class="col-md-4">
+  <input id="gestationalage" name="gestationalage" ng-model="patient.gestationalage" type="text" class="form-control input-md" >
+  <span class="help-block">Enter like 20 weeks and 4 days</span>  
   </div>
 </div>
 

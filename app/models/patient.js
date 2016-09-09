@@ -9,6 +9,7 @@ var PatientSchema = new Schema({
   abnormaloutcome: String,
   chdtype: String,
   whereseen: String,
+  gestationalage: String,
   addedby: String
 });
 
