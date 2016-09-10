@@ -97,6 +97,9 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
     angular.forEach(input, function(patient){
 	  var d1 = patient.refrecieved;
 	  var d2 = patient.scanundertaken;
+	  if(patient.gestationalageweeks != undefined) {
+		patient.gestationalage = patient.gestationalageweeks + '.' + patient.gestationalagedays + ' weeks';
+	  }
 	  patient.numdaystaken = dateDifference(new Date(d1), new Date(d2));
 	  if(patient.numdaystaken <= 3) {
 		patient.withinnationaltarget = 'Y';

@@ -135,7 +135,8 @@ $scope.editPatient = function() {
 			abnormaloutcome: $scope.patient.abnormaloutcome,
 			chdtype: $scope.patient.chdtype,
 			whereseen: $scope.patient.whereseen,
-			gestationalage: $scope.patient.gestationalage
+			gestationalageweeks: $scope.patient.gestationalageweeks,
+			gestationalagedays: $scope.patient.gestationalagedays
         };
 		
 	$resource( '/patients/' + $scope.patient._id , { _id: $scope.patient._id }, {
