@@ -14,23 +14,26 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
   <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="favicon.png">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
+<div id="icon" style="float: left; background-image: url(favicon.png); width: 128px; height: 128px; margin-left: 10px;"></div>
+<div style="float: right; margin-right: 100px; padding-top: 50px;">
   <ul class="menu">
 	<li><a href="#!/captureform">Add Patient</a></li>
     <li><a href="#!/patients">View Patients</a></li>
     <li><a href="#!/users">View Users</a></li>
 	<li><a href="#!/logout">Logout</a></li>
 </ul>
+</div>
+<div style="clear: both;"></div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
-
-  <div>Medical Audit System: v<span app-version></span></div>
+ <div style="margin: 15px;" ng-view></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
