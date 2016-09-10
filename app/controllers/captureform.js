@@ -86,6 +86,8 @@ $scope.addPatient = function() {
 	} else {
 		$scope.patient.abnormaloutcome = 'N';
 	}
+	
+	if($scope.patient.gestationalagedays == undefined) $scope.patient.gestationalagedays = '0';
 
 	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
 		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 

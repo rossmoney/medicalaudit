@@ -127,6 +127,10 @@ $scope.editPatient = function() {
 		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
 		$scope.patient.initials[1];
 		
+	if($scope.patient.gestationalagedays == '') {
+		$scope.patient.gestationalagedays = '0';
+	}
+		
 	var editData = {
             anonid : $scope.patient.anonid, 
             refrecieved: $scope.patient.refrecieved,

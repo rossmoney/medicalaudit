@@ -4,8 +4,7 @@ bodyParser = require("body-parser"),
 mongoose = require('mongoose'),
 fs = require('fs');
 
-var mongoUri = process.env.MONGOLAB_URI;
-//var mongoUri = 'mongodb://localhost/patients';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/patients';
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', function () {
