@@ -62,10 +62,13 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
 			$rootScope.$apply();
         },
 		revealDoB: function(patientIndex, scope, $location){
+
 			var firstin = scope.patient.anonid[0],
 			    lastin = scope.patient.anonid[scope.patient.anonid.length - 1],
 				dob = scope.patient.anonid.slice(0, -1).slice(1, scope.patient.anonid.length - 1);
 			
+			dob = dob.slice(4, 8) + dob.slice(0, 4);
+			dob = dob.slice(3, 6) + dob.slice(0, 3) + dob.slice(6, 8);
 			dob = dob.slice(4, 6) + '/' + dob.slice(6, 8) + '/' + dob.slice(0, 4);
 			alert('First Initial: ' + firstin + '\n' + 'Last Initial: ' + lastin + '\n' + 'DoB: ' + dob);
 		}

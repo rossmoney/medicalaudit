@@ -60,8 +60,11 @@ angular.module('myApp.EditPatients', ['ngRoute'])
 		$scope.patient.initials = $scope.patient.anonid[0] +  $scope.patient.anonid[$scope.patient.anonid.length - 1];
 		var dob = $scope.patient.anonid.slice(0, -1).slice(1, $scope.patient.anonid.length - 1);
 			
-		$scope.patient.dob = dob.slice(0, 4) + '/' + dob.slice(6, 8) + '/' + dob.slice(4, 6);
-		$scope.patient.dob = new Date($scope.patient.dob);
+		dob = dob.slice(4, 8) + dob.slice(0, 4);
+		dob = dob.slice(3, 6) + dob.slice(0, 3) + dob.slice(6, 8);
+		dob = dob.slice(0, 4) + '/' + dob.slice(6, 8) + '/' + dob.slice(4, 6);
+		
+		$scope.patient.dob = new Date(dob);
 		
 		if($scope.patient.abnormaloutcome == 'Y') {
 			$scope.patient.abnormaloutcome = true;
@@ -123,10 +126,14 @@ $scope.editPatient = function() {
 		$scope.patient.dob = new Date($scope.patient.dob);
 	}
 	
-	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
-		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
-		$scope.patient.initials[1];
-		
+	$scope.patient.anonid = $scope.patient.dob.getFullYear() + 
+		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2);
+
+	
+	$scope.patient.anonid = $scope.patient.anonid.slice(3, 6) + $scope.patient.anonid.slice(0, 3) + $scope.patient.anonid.slice(6, 8);
+	$scope.patient.anonid = $scope.patient.anonid.slice(4, 8) + $scope.patient.anonid.slice(0, 4); 
+	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.anonid + $scope.patient.initials[1];
+	
 	if($scope.patient.gestationalagedays == '') {
 		$scope.patient.gestationalagedays = '0';
 	}

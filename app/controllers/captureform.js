@@ -89,9 +89,12 @@ $scope.addPatient = function() {
 	
 	if($scope.patient.gestationalagedays == undefined) $scope.patient.gestationalagedays = '0';
 
-	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.dob.getFullYear() + 
-		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2) + 
-		$scope.patient.initials[1];
+	$scope.patient.anonid = $scope.patient.dob.getFullYear() + 
+		("0" + $scope.patient.dob.getDate()).slice(-2) + ("0" + ($scope.patient.dob.getMonth() + 1)).slice(-2);
+
+	$scope.patient.anonid = $scope.patient.anonid.slice(3, 6) + $scope.patient.anonid.slice(0, 3) + $scope.patient.anonid.slice(6, 8);
+	$scope.patient.anonid = $scope.patient.anonid.slice(4, 8) + $scope.patient.anonid.slice(0, 4); 
+	$scope.patient.anonid = $scope.patient.initials[0] + $scope.patient.anonid + $scope.patient.initials[1];
 		
 	if($rootScope.globals.currentUser) {
 		$scope.patient.addedby = $rootScope.globals.currentUser.username;
