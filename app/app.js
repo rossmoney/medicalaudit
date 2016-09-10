@@ -61,7 +61,14 @@ angular.module('myApp', [
  
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
 			
-			var restrictedPage = $.inArray($location.path(), ['/captureform', '/thankyou', '/users/add']) === -1;
+			var nomenuPage = $.inArray($location.path(), [ '/login', '/logout']) > -1;
+			if(nomenuPage) {
+				$('.menu').hide();
+			} else {
+				$('.menu').show();
+			}
+			
+			var restrictedPage = $.inArray($location.path(), ['/captureform', '/thankyou']) === -1;
 			
 			if(restrictedPage && $rootScope.globals.currentUser) {
 				$resource('/sessions/:_id', { _id: $rootScope.globals.currentUser.tokenid}).get(function(result) {
