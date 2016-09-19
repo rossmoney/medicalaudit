@@ -103,6 +103,11 @@ angular.module('myApp.patients', ['ngResource', 'ngRoute'])
 	  if(patient.gestationalageweeks != undefined) {
 		patient.gestationalage = patient.gestationalageweeks + '.' + patient.gestationalagedays + ' weeks';
 	  }
+	  if(patient.gestationalatreferralweeks != undefined) {
+		patient.gestationatreferral = patient.gestationatreferralweeks + '.' + patient.gestationatreferraldays + ' weeks';
+	  } else {
+		patient.gestationatreferral = 'No Data';
+	  }
 	  patient.numdaystaken = dateDifference(new Date(d1), new Date(d2));
 	  if(patient.numdaystaken <= 3) {
 		patient.withinnationaltarget = 'Y';

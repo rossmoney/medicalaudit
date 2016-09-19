@@ -11,7 +11,16 @@ var PatientSchema = new Schema({
   whereseen: String,
   gestationalageweeks: String,
   gestationalagedays: String,
-  addedby: String
+  addedby: String,
+  //19/09/2016
+  name: String,
+  hospitalnum: String,
+  referralgrade: String,
+  referralfrom: String,
+  referralformpresent: String,
+  referralreason: String,
+  gestationatreferralweeks: Number,
+  gestationatreferraldays: Number
 });
 
 mongoose.model('Patient', PatientSchema);

@@ -137,6 +137,16 @@ $scope.editPatient = function() {
 	if($scope.patient.gestationalagedays == '') {
 		$scope.patient.gestationalagedays = '0';
 	}
+	
+	var d1 = moment($scope.patient.refrecieved);
+	var d2 = moment($scope.patient.scanundertaken);
+	var referraldiff = Math.floor(moment.duration(d2.diff(d1)).asDays());
+	
+	var totaldays = (parseInt($scope.patient.gestationalageweeks) * 7) + parseInt($scope.patient.gestationalagedays);
+	var gestationatreferraldays = totaldays - referraldiff;
+	
+	$scope.patient.gestationatreferralweeks = Math.floor(gestationatreferraldays / 7);
+	$scope.patient.gestationatreferraldays = gestationatreferraldays % 7;
 		
 	var editData = {
             anonid : $scope.patient.anonid, 
@@ -147,7 +157,16 @@ $scope.editPatient = function() {
 			chdtype: $scope.patient.chdtype,
 			whereseen: $scope.patient.whereseen,
 			gestationalageweeks: $scope.patient.gestationalageweeks,
-			gestationalagedays: $scope.patient.gestationalagedays
+			gestationalagedays: $scope.patient.gestationalagedays,
+			//19/09/2016
+			name: $scope.patient.name,
+			hospitalnum: $scope.patient.hospitalnum,
+			referralgrade: $scope.patient.referralgrade,
+			referralfrom: $scope.patient.referralfrom,
+			referralformpresent: $scope.patient.referralformpresent,
+			referralreason: $scope.patient.referralreason,
+			gestationatreferralweeks: $scope.patient.gestationatreferralweeks,
+			gestationatreferraldays: $scope.patient.gestationatreferraldays
         };
 		
 	$resource( '/patients/' + $scope.patient._id , { _id: $scope.patient._id }, {

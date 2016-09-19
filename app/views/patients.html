@@ -3,6 +3,7 @@
 	  <tr>
 	    <th>Anonymous Patient ID</th>
         <th>Referral for fetal cardiac scan received</th>
+		<th style="width: 200px;">Referral details</th>
         <th>Fetal cardiac scan undertaken</th>
         <th>No. days taken</th>
 		<th>Within national target (3 days)?</th>
@@ -12,6 +13,7 @@
 		<th>Where seen</th>
 		<th>Day seen</th>
 		<th>Gestational age</th>
+		<th>Gestation at Referral</th>
 		<th>Added by</th>
 	  </tr>
     </thead>
@@ -22,6 +24,8 @@
 			<button ng-reveal-dob="$index" class="btn btn-danger">Reveal</button>
 		</td>
         <td>{{patient.refrecieved | date : "dd/MM/yyyy HH:mm" }}</td>
+		<td>Grade: {{patient.referralgrade}}, From: {{patient.referralfrom}}<br />
+		Form / Letter Present: {{patient.referralformpresent}}<br />Referral Reason: {{patient.referralreason}}</td>
         <td>{{patient.scanundertaken | date : "dd/MM/yyyy HH:mm" }}</td>
         <td>{{patient.numdaystaken}}</td>
 		<td>{{patient.withinnationaltarget}}</td>
@@ -31,6 +35,7 @@
 		<td>{{patient.whereseen}}</td>
 		<td>{{patient.scanundertaken | date : "EEEE"}}</td>
 		<td>{{patient.gestationalage}}</td>
+		<td>{{patient.gestationatreferral}}</td>
 		<td>{{patient.addedby}}</td>
 		<td>
 			<button type="button" class="btn btn-default" ng-edit-patient="$index">Edit</button>
